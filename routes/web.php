@@ -1,3 +1,4 @@
+<?php
 use App\Models\Evento;
 use App\Models\Ticket;
 use Illuminate\Http\Request;

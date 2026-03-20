@@ -4,33 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticket App</title>
-    <!-- Bootstrap opcional -->
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+        }
+        .card {
+            border-radius: 15px;
+        }
+    </style>
 </head>
-<body class="container py-4">
 
-    <h1 class="mb-4">Ticket App</h1>
+<body>
 
-    <!-- 1️⃣ Formulario para crear evento -->
-    <h2>Crear Evento</h2>
-    <form method="POST" action="/eventos" class="mb-4">
-        @csrf
-        <input type="text" name="nombre" placeholder="Nombre" required class="form-control mb-2">
-        <input type="text" name="fecha" placeholder="Fecha" required class="form-control mb-2">
-        <input type="text" name="lugar" placeholder="Lugar" required class="form-control mb-2">
-        <button type="submit" class="btn btn-primary">Crear Evento</button>
-    </form>
+<div class="container py-5">
 
-    <!-- 2️⃣ Lista de eventos -->
-    <h2>Eventos</h2>
-    <ul class="list-group">
+    <h1 class="text-center mb-5">🎟️ Ticket App</h1>
+
+    <!-- FORMULARIO -->
+    <div class="card bg-dark text-white p-4 mb-5 shadow">
+        <h3 class="mb-3">Crear Evento</h3>
+
+        <form method="POST" action="/eventos">
+            @csrf
+            <input type="text" name="nombre" class="form-control mb-3" placeholder="Nombre del evento" required>
+            <input type="text" name="fecha" class="form-control mb-3" placeholder="Fecha" required>
+            <input type="text" name="lugar" class="form-control mb-3" placeholder="Lugar" required>
+
+            <button class="btn btn-primary w-100">Crear Evento</button>
+        </form>
+    </div>
+
+    <!-- EVENTOS -->
+    <h3 class="mb-4">Eventos disponibles</h3>
+
+    <div class="row">
         @foreach($eventos as $evento)
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{ $evento->nombre }} - {{ $evento->fecha }} - {{ $evento->lugar }}
-                <a href="/comprar/{{ $evento->id }}" class="btn btn-success btn-sm">Comprar</a>
-            </li>
+            <div class="col-md-4 mb-4">
+                <div class="card bg-secondary text-white p-3 shadow">
+                    
+                    <h5>{{ $evento->nombre }}</h5>
+                    <p class="mb-1">📅 {{ $evento->fecha }}</p>
+                    <p class="mb-3">📍 {{ $evento->lugar }}</p>
+
+                    <a href="/comprar/{{ $evento->id }}" class="btn btn-success">
+                        Comprar Ticket
+                    </a>
+
+                </div>
+            </div>
         @endforeach
-    </ul>
+    </div>
+
+</div>
 
 </body>
 </html>
