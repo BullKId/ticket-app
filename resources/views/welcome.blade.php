@@ -69,6 +69,8 @@
             @enderror
 
             <button class="btn btn-primary w-100 mt-2">Crear Evento</button>
+            
+
         </form>
     </div>
 
@@ -136,6 +138,21 @@
     </div>
 
 </div>
+<script>
+    let enviado = false;
 
+    document.querySelector('form').addEventListener('submit', function(e) {
+        if (enviado) {
+            e.preventDefault();
+            return;
+        }
+
+        enviado = true;
+
+        const btn = document.getElementById('btnCrear');
+        btn.disabled = true;
+        btn.innerText = 'Creando... ⏳';
+    });
+</script>
 </body>
 </html>
