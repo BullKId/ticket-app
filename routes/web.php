@@ -19,7 +19,7 @@ Route::post('/eventos', function (Request $request) {
         'fecha' => 'required|date',
         'lugar' => 'required|string|max:50',
     ], [
-        'nombre.required' => 'El nombre del evento es obligatorio.',
+        'nombre.required' => 'No se aceptan caracteres vacíos.',
         'nombre.max' => 'El nombre no puede tener más de 50 caracteres.',
 
         'fecha.required' => 'La fecha es obligatoria.',
